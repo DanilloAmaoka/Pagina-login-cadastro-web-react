@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { auth, db } from '../services/firebaseConfig'
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { doc, setDoc } from 'firebase/firestore';
 
 function Cadastro() {
   const [email, setEmail] = useState('');
@@ -8,11 +11,28 @@ function Cadastro() {
   const [sobrenome, setSobrenome] = useState('');
   const [dataNasc, setDataNasc] = useState('');
 
-  const handleCadastro = (e) => {
+  const handleCadastro = async (e) => {
     e.preventDefault();
-    console.log("Dados para cadastrar:", { email, senha, nome, sobrenome, dataNasc });
-    // Aqui vai entrar a lógica do Firebase no próximo passo
-  };
+
+    try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
+        const user = userCredential.user;
+
+        await setDoc(doc(db, "usuarios", user.uid), {
+        nome: nome,
+        sobrenome: sobrenome,
+        dataNascimento: dataNasc,
+        email: email,
+        uid: user.uid
+        });
+
+        alert("Usuário cadastrado com sucesso!");
+        // Aqui você pode usar o navigate para ir para a tela principal
+    } catch (error) {
+        console.error("Erro ao cadastrar:", error.message);
+        alert("Erro ao cadastrar: " + error.message);
+    }
+};
 
   return (
     <div className="container-central">
