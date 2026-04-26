@@ -13,20 +13,15 @@ function Login() {
         e.preventDefault();
 
         try {
-            // Tenta logar o usuário
             await signInWithEmailAndPassword(auth, email, senha);
             
             setMensagem("sucesso");
-            
-            // Redireciona para a tela principal após 1.5 segundos
             setTimeout(() => {
                 navigate('/principal'); 
             }, 1500);
 
         } catch (error) {
             let mensagemAmigavel = "";
-
-            // Tratamento de erros específicos para Login
             switch (error.code) {
                 case 'auth/user-not-found':
                 case 'auth/wrong-password':
