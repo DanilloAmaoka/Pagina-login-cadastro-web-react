@@ -84,3 +84,39 @@
 .card-projeto button:active {
   transform: scale(0.98);  
 }
+
+.mensagem {
+  margin-top: 10px;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.sucesso {
+  background-color: #e6f7ee;
+  color: #2e7d32;
+}
+
+.erro {
+  background-color: #fdecea;
+  color: #c62828;
+}
+
+.desabilitado {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.erro {
+  animation: shake 0.3s;
+  border: 1px solid red;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
