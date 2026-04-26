@@ -4,10 +4,6 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
-function oioi() {
-
-}
-
 function Principal() {
     const [userData, setUserData] = useState(null);
     const [loading, setLoading] = useState(true);
